@@ -1,0 +1,8 @@
+{
+  "scan_interval_seconds": 30,
+  "enable_notifications": true,
+  "authorized_devices": {
+    "4a:6c:34:73:21:f9": "Home Gateway",
+    "a0:d3:7a:cb:8f:e5": "My Arch Workstation"
+  }
+}
