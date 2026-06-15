@@ -12,7 +12,7 @@ It scans local Wi-Fi subnets using high-concurrency worker goroutines to discove
 *   🛡️ **Intrusion Alerts:** Detects and reports newly joined unauthorized MAC addresses immediately.
 *   🔔 **OS Desktop Notifications:** Integrated with Linux desktop notification daemons (`notify-send`) to push instant warning bubbles.
 *   🔍 **Service Fingerprinting:** Audits and lists common active servers (such as SSH, HTTP, HTTPS, SMB, and dev servers) running on network nodes.
-*   💾 **Persistent Device Registry:** Simple file-based configuration (`config.json`) maps device MAC addresses to friendly aliases (e.g., `"My Arch Workstation"`).
+*   💾 **Persistent Device Registry:** Simple file-based configuration (`config.json`) maps device MAC addresses to friendly aliases (e.g., `"Workstation"`).
 *   🏠 **Local Interface Resolution:** Auto-resolves the host machine's interface MAC addresses to distinguish your own machine from external network traffic.
 
 ---
@@ -30,13 +30,13 @@ It scans local Wi-Fi subnets using high-concurrency worker goroutines to discove
 ### 1. Compile the Binary
 Clone or navigate to the directory and compile the Go project into a standalone executable:
 ```bash
-cd /home/jonath/Documents/code/go/netscan
-go build -o netscan
+cd /path/to/netscan
+go build -o netsentinel ./cmd/netsentinel
 ```
 
 ### 2. General Usage Syntax
 ```bash
-./netscan <command> [arguments]
+./netsentinel <command> [arguments]
 ```
 
 ---
@@ -58,18 +58,18 @@ go build -o netscan
 
 *   **Authorize your local gateway (router) and workstation:**
     ```bash
-    ./netscan authorize 4a:6c:34:73:21:f9 "Home Gateway"
-    ./netscan authorize a0:d3:7a:cb:8f:e5 "My Arch Workstation"
+    ./netsentinel authorize 00:11:22:33:44:55 "Home Gateway"
+    ./netsentinel authorize aa:bb:cc:dd:ee:ff "My Workstation"
     ```
 
 *   **View your whitelisted devices and scan who is currently online:**
     ```bash
-    ./netscan list
+    ./netsentinel list
     ```
 
 *   **Run the security monitor daemon:**
     ```bash
-    ./netscan monitor
+    ./netsentinel monitor
     ```
 
 ---
@@ -83,8 +83,8 @@ On its first run, LAN Sentinel creates a configuration file (`config.json`) in t
   "scan_interval_seconds": 30,
   "enable_notifications": true,
   "authorized_devices": {
-    "4a:6c:34:73:21:f9": "Home Gateway",
-    "a0:d3:7a:cb:8f:e5": "My Arch Workstation"
+    "00:11:22:33:44:55": "Home Gateway",
+    "aa:bb:cc:dd:ee:ff": "My Workstation"
   }
 }
 ```
@@ -95,7 +95,7 @@ On its first run, LAN Sentinel creates a configuration file (`config.json`) in t
 
 ```mermaid
 graph TD
-    A[netscan Command-Line] -->|monitor| B[Start Monitoring Loop]
+    A[netsentinel Command-Line] -->|monitor| B[Start Monitoring Loop]
     A -->|authorize/deauthorize| C[Modify config.json]
     A -->|list/scan| D[Run One-Time Subnet Scanner]
     
